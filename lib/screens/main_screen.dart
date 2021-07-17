@@ -18,9 +18,8 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('The Name'),
+           const Text("The Name"),
         ],
       ),
     );

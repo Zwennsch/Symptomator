@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MainScreen(title: 'Symptomator'),
+      home: const MainScreen(title: 'Symptomator'),
     );
   }
 }
