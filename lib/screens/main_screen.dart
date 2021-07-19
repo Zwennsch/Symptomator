@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/styles/text_styles.dart';
+import 'package:intl/intl.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
@@ -9,6 +11,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,9 +20,26 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           const Text("The Name"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text('Datum: $date')],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircleAvatar(
+                  radius: 20.0,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person)),
+              Text(
+                "Name Nachname",
+                textAlign: TextAlign.center,
+                style: nameStyle,
+              ),
+            ],
+          )
         ],
       ),
     );
