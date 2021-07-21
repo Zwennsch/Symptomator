@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "5c49851100aa021825b346d16d7f3abf",
+      "css": "temperatire",
+      "code": 59633,
+      "src": "typicons"
+    },
+    {
+      "uid": "83a1a2e3814cbfbc88939d0d0282e1c2",
+      "css": "head_side_cough",
+      "code": 59392,
+      "src": "fontawesome5"
+    }
+  ]
+}
