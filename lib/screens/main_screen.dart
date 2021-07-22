@@ -50,10 +50,11 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
             child: ListView(
               children: [
-                const IllnessCard(
-                    icon: Icon(Icons.ac_unit), illness: "Kopfschmerzen"),
-                const IllnessCard(
-                    icon: Icon(Icons.access_alarm_outlined), illness: 'Fieber')
+                IllnessCard(
+                    illnessIcon: Icon(Icons.ac_unit), illness: "Kopfschmerzen"),
+                IllnessCard(
+                    illnessIcon: Icon(Icons.access_alarm_outlined),
+                    illness: 'Fieber')
               ],
             ),
           )

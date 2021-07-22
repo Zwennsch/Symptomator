@@ -1,40 +1,10 @@
 import 'package:flutter/material.dart';
 
-// class IllnessCard extends StatefulWidget {
-//   final Icon icon;
-//   final String illness;
-//   const IllnessCard({Key? key, required this.icon, required this.illness})
-//       : super(key: key);
-
-//   @override
-//   _IllnessCardState createState() => _IllnessCardState();
-// }
-
-// class _IllnessCardState extends State<IllnessCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     double rating = 0;
-//     return Card(
-//       child: ListTile(
-//         leading: widget.icon,
-//         title: Text(widget.illness),
-//         trailing: Slider(
-//           value: rating,
-//           onChanged: (newValue) {
-//             setState(() => rating = newValue);
-//           },
-//           max: 5,
-//           divisions: 5,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class IllnessCard extends StatefulWidget {
-  final Icon icon;
+  final Icon illnessIcon;
   final String illness;
-  const IllnessCard({Key? key, required this.icon, required this.illness})
+  const IllnessCard(
+      {Key? key, required this.illnessIcon, required this.illness})
       : super(key: key);
 
   @override
@@ -42,11 +12,21 @@ class IllnessCard extends StatefulWidget {
 }
 
 class _IllnessCardState extends State<IllnessCard> {
+  double rating = 0;
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_final_locals
-    double rating = 0;
     return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black38, offset: Offset(5, 5), blurRadius: 10)
+          ]),
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(4),
       height: 80,
@@ -54,28 +34,29 @@ class _IllnessCardState extends State<IllnessCard> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              widget.icon,
+              widget.illnessIcon,
+              const SizedBox(
+                width: 10,
+              ),
               Text(
                 widget.illness,
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             ],
           ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Slider(
-                  value: rating,
-                  onChanged: (newValue) {
-                    setState(() => rating = newValue);
-                  },
-                  max: 6,
-                  divisions: 6,
-                ),
-              ],
+            child: Slider(
+              value: rating,
+              onChanged: (newValue) {
+                setState(() {
+                  rating = newValue;
+                  print(rating);
+                });
+              },
+              max: 6,
+              divisions: 6,
             ),
           )
         ],
