@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
-/// 
+///
 /// * Font Awesome 5, Copyright (C) 2016 by Dave Gandy
 ///         Author:    Dave Gandy
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
@@ -30,7 +30,21 @@ class MyFlutterApp {
   static const String? _kFontPkg = null;
 
   // ignore: constant_identifier_names
-  static const IconData head_side_cough = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData head_side_cough =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   // ignore: avoid_redundant_argument_values
-  static const IconData temperatire = IconData(0xe8f1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData temperatire =
+      IconData(0xe8f1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+}
+
+class MyFlutterApp2 {
+  MyFlutterApp2._();
+
+  static const _kFontFam = 'MyFlutterApp2';
+  static const String? _kFontPkg = null;
+
+  // ignore: constant_identifier_names
+  // ignore: avoid_redundant_argument_values
+  static const IconData head_side_virus =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

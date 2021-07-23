@@ -44,6 +44,13 @@ class _IllnessCardState extends State<IllnessCard> {
                 widget.illness,
                 style: const TextStyle(fontSize: 20),
               ),
+              Expanded(
+                  child: Text(
+                // TODO : Find a better word for 'Schwere'
+                '${rating.toInt()}',
+                textAlign: TextAlign.end,
+                style: const TextStyle(fontSize: 20),
+              )),
             ],
           ),
           Expanded(
@@ -52,7 +59,7 @@ class _IllnessCardState extends State<IllnessCard> {
               onChanged: (newValue) {
                 setState(() {
                   rating = newValue;
-                  print(rating);
+                  // print(rating);
                 });
               },
               max: 6,

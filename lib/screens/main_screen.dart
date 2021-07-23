@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/my_flutter_app_icons.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
@@ -49,12 +50,16 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
             child: ListView(
-              children: [
+              children: const [
                 IllnessCard(
-                    illnessIcon: Icon(Icons.ac_unit), illness: "Kopfschmerzen"),
+                    illnessIcon: Icon(MyFlutterApp.head_side_cough),
+                    illness: "Husten"),
                 IllnessCard(
-                    illnessIcon: Icon(Icons.access_alarm_outlined),
-                    illness: 'Fieber')
+                    illnessIcon: Icon(MyFlutterApp.temperatire),
+                    illness: 'Fieber'),
+                IllnessCard(
+                    illnessIcon: Icon(MyFlutterApp2.head_side_virus),
+                    illness: "Kopfschmerzen"),
               ],
             ),
           )
