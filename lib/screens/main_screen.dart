@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key, required this.title}) : super(key: key);
+  const MainScreen({Key? key, required this.title, required this.name})
+      : super(key: key);
   final String title;
+  final String name;
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -30,19 +32,16 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [const Text('Some other text'), Text('Datum: $date')],
-          ),
+          Text('Datum: $date'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircleAvatar(
+            children: [
+              const CircleAvatar(
                   radius: 20.0,
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person)),
               Text(
-                "Name Nachname",
+                widget.name,
                 textAlign: TextAlign.center,
                 style: nameStyle,
               ),
@@ -62,6 +61,19 @@ class _MainScreenState extends State<MainScreen> {
                     illness: "Kopfschmerzen"),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton.icon(
+                  onPressed: () => print('SAVE'),
+                  icon: const Icon(Icons.save),
+                  label: const Text('SAVE')),
+              ElevatedButton.icon(
+                  onPressed: () => print('Add Desease'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('ADD NEW')),
+            ],
           )
         ],
       ),

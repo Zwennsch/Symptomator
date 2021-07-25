@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/screens/loading_screen.dart';
+import 'package:symptomator/screens/new_user_screen.dart';
 import 'package:symptomator/screens/main_screen.dart';
 import 'package:symptomator/styles/text_styles.dart';
 
@@ -13,7 +15,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: const MainScreen(title: 'Symptomator'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoadingScreen(),
+        // '/': (context) => const NewUserScreen(),
+        '/newUser': (context) => const NewUserScreen(),
+        // TODO: Here a fix is needed, there shouldn't be a name here
+        '/main': (context) => const MainScreen(
+              title: 'Symptomator',
+              name: "...",
+            ),
+      },
+      // home: const MainScreen(title: 'Symptomator'),
     );
   }
 }

@@ -26,6 +26,7 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
   lint: ^1.5.3
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -59,12 +60,14 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
-    - family:  MyFlutterApp
+        - asset: fonts/Montserrat-Bold.ttf
+          weight: 700
+    - family: MyFlutterApp
       fonts:
-       - asset: fonts/MyFlutterApp.ttf
-    - family:  MyFlutterApp2
+        - asset: fonts/MyFlutterApp.ttf
+    - family: MyFlutterApp2
       fonts:
-       - asset: fonts/MyFlutterApp2.ttf
+        - asset: fonts/MyFlutterApp2.ttf
         # - asset: fonts/Schyler-Italic.ttf
         #   style: italic
   #   - family: Trajan Pro

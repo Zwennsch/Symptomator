@@ -54,6 +54,7 @@ class _IllnessCardState extends State<IllnessCard> {
             ],
           ),
           Expanded(
+            // TODO : change / add range to slider
             child: Slider(
               value: rating,
               onChanged: (newValue) {
@@ -62,8 +63,8 @@ class _IllnessCardState extends State<IllnessCard> {
                   // print(rating);
                 });
               },
-              max: 6,
-              divisions: 6,
+              max: 5,
+              divisions: 5,
             ),
           )
         ],

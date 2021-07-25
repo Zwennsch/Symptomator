@@ -31,12 +31,15 @@ class MyFlutterApp {
 
   // ignore: constant_identifier_names
   static const IconData head_side_cough =
+      // ignore: avoid_redundant_argument_values
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   // ignore: avoid_redundant_argument_values
   static const IconData temperatire =
+      // ignore: avoid_redundant_argument_values
       IconData(0xe8f1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
 
+// TODO do some clean-up -> put the icons and fonts in one file if possible
 class MyFlutterApp2 {
   MyFlutterApp2._();
 
@@ -44,7 +47,8 @@ class MyFlutterApp2 {
   static const String? _kFontPkg = null;
 
   // ignore: constant_identifier_names
-  // ignore: avoid_redundant_argument_values
   static const IconData head_side_virus =
+
+      // ignore: avoid_redundant_argument_values
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
