@@ -1,1 +1,1 @@
-class Desease {}
+class Disease {}

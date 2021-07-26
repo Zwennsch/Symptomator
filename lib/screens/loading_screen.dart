@@ -54,7 +54,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   Widget nextScreen(String userName) {
     if (_userFound) {
-      return MainScreen(surName: user.surName, name: userName);
+      return MainScreen(surName: user.surName, name: userName, newUser: false,);
     } else {
       return const NewUserScreen();
     }

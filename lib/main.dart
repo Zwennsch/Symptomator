@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/main': (context) => const MainScreen(
               surName: 'User',
               name: "New",
+              newUser: true,
             ),
       },
       // home: const MainScreen(title: 'Symptomator'),
