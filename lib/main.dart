@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/backend/user.dart';
 import 'package:symptomator/screens/loading_screen.dart';
 import 'package:symptomator/screens/new_user_screen.dart';
 import 'package:symptomator/screens/main_screen.dart';
@@ -21,9 +22,8 @@ class MyApp extends StatelessWidget {
         // '/': (context) => const NewUserScreen(),
         '/newUser': (context) => const NewUserScreen(),
         // TODO: Here a fix is needed, there shouldn't be a name here
-        '/main': (context) => const MainScreen(
-              surName: 'User',
-              name: "New",
+        '/main': (context) =>  MainScreen(
+             user: User(name1: 'NEW', surName1: 'USER'),
               newUser: true,
             ),
       },

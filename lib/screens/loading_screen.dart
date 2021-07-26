@@ -34,7 +34,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     user = await handler.readUser();
 
-    if (user.name != 'no') {
+    if (user.name1 != 'no') {
       _userFound = true;
     }
     setState(() {
@@ -48,13 +48,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
         body: Center(
       child: _isLoading
           ? const CircularProgressIndicator()
-          : nextScreen(user.name),
+          : nextScreen(user.name1),
     ));
   }
 
   Widget nextScreen(String userName) {
     if (_userFound) {
-      return MainScreen(surName: user.surName, name: userName, newUser: false,);
+      return MainScreen(user: user, newUser: false,);
     } else {
       return const NewUserScreen();
     }

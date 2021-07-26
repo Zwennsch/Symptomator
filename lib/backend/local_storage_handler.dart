@@ -34,7 +34,7 @@ class LocalStorageHandler {
     } catch (e) {
       print('Error in reading user :$e');
       // If encountering an error, return 0
-      return User('no', 'nameOHHHH');
+      return User(name1: 'no', surName1: 'nameOHHHH');
     }
   }
 

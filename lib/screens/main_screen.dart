@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/backend/disease.dart';
+import 'package:symptomator/backend/user.dart';
 import 'package:symptomator/my_flutter_app_icons.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key, required this.name, required this.surName, required this.newUser})
+  const MainScreen({Key? key, required this.user, required this.newUser})
       : super(key: key);
-  final String name;
-  final String surName;
+  final User user;
   final bool newUser;
 
   @override
@@ -20,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
+    List<Disease> userDiseases = widget.user.diseases;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Symptomator'),
@@ -43,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person)),
               Text(
-                '${widget.name} ${widget.surName}',
+                '${widget.user.name1} ${widget.user.surName1}',
                 textAlign: TextAlign.center,
                 style: nameStyle,
               ),
@@ -52,6 +54,7 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
             child: ListView(
               children: const [
+                // TODO: this should build the List of IllnessCards depending on the List<Disease>
                 IllnessCard(
                     illnessIcon: Icon(MyFlutterApp.head_side_cough),
                     illness: "Husten"),

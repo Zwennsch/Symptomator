@@ -1,25 +1,25 @@
 import 'package:symptomator/backend/disease.dart';
 
 class User {
-  final String _name;
+  final String name1;
 
   // final int _id;
-  final String _surName;
+  final String surName1;
 
   final List<Disease> _diseases = [];
 
-  User(this._name, this._surName);
+  User({required this.name1, required this.surName1});
   User.fromString(String userDetails)
       // ignore: prefer_initializing_formals
-      : _name = userDetails,
-        _surName = 'wurst';
+      : name1 = userDetails,
+        surName1 = 'wurst';
 
   // static User parse(String userDetailsFromFile) {
   //   return User('hams', 1, 'wurst');
   // }
 
-  String get name => _name;
-  String get surName => _surName;
+  String get name => name1;
+  String get surName => surName1;
   // TODO: this has to return an unmodifiable ListView
   List<Disease> get diseases => _diseases;
 }

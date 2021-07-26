@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/backend/user.dart';
 import 'package:symptomator/screens/main_screen.dart';
 
 class NewUserScreen extends StatelessWidget {
@@ -42,7 +43,7 @@ class NewUserScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              MainScreen(surName: _surname, name: _name, newUser: true,)));
+                              MainScreen(user: User(name1: _name, surName1: _surname), newUser: true,)));
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
                 child: const Text('ENTER'),
