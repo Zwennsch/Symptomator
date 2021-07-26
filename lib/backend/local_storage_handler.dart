@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -20,12 +21,15 @@ class LocalStorageHandler {
       final file = await _localFile;
 
       // Read the file
+      // TODO: add a remark/fix to if file does not exist => create it!
+      bool fileExists = await file.exists();
+      print('File existiert: $fileExists');
       final contents = await file.readAsString();
       print(contents);
 
       return User.fromString(contents);
     } catch (e) {
-      print('Error in reading user' + e.toString());
+      print('Error in reading user :$e');
       // If encountering an error, return 0
       return User('no', -1, 'nameOHHHH');
     }

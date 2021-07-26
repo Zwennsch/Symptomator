@@ -5,22 +5,22 @@ import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key, required this.title, required this.name})
+  const MainScreen({Key? key,  required this.name, required this.surName})
       : super(key: key);
-  final String title;
   final String name;
+  final String surName;
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
-
+// TODO: side should not have any disease when user first opens page
 class _MainScreenState extends State<MainScreen> {
   String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Symptomator'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person)),
               Text(
-                widget.name,
+                '${widget.name} ${widget.surName}',
                 textAlign: TextAlign.center,
                 style: nameStyle,
               ),

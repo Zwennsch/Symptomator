@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/screens/main_screen.dart';
 
 class NewUserScreen extends StatelessWidget {
   const NewUserScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class NewUserScreen extends StatelessWidget {
               ),
               TextFormField(
                 decoration: const InputDecoration(hintText: 'Vorname'),
-                 onChanged: (name) => _name = name,
+                onChanged: (name) => _name = name,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -36,7 +37,12 @@ class NewUserScreen extends StatelessWidget {
                 onPressed: () {
                   // User.createNewUser()
                   print('$_surname ,  $_name');
-                  Navigator.pushReplacementNamed(context, '/main');
+                  // Navigator.pushReplacementNamed(context, '/main');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MainScreen(surName: _surname, name: _name)));
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
                 child: const Text('ENTER'),

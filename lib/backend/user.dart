@@ -19,4 +19,5 @@ class User {
   // }
 
   String get name => _name;
+  String get surName => _surName;
 }
