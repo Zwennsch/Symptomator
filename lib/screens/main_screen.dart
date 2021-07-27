@@ -78,7 +78,12 @@ class _MainScreenState extends State<MainScreen> {
                   label: const Text('SAVE')),
               ElevatedButton.icon(
                   onPressed: () => showModalBottomSheet(
-                      context: context, builder: (context) => AddDisease()),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      context: context,
+                      builder: (context) => AddDisease()),
                   icon: const Icon(Icons.add),
                   label: const Text('ADD NEW')),
             ],

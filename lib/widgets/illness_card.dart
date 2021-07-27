@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 
 class IllnessCard extends StatefulWidget {
-  final Disease disease;
-  const IllnessCard(
+   final Disease disease;
+   const IllnessCard(
       {Key? key, required this.disease})
       : super(key: key);
 
