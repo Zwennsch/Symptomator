@@ -36,9 +36,6 @@ class NewUserScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // User.createNewUser()
-                  print('$_surname ,  $_name');
-                  // Navigator.pushReplacementNamed(context, '/main');
                   Navigator.push(
                       context,
                       MaterialPageRoute(

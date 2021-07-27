@@ -1,4 +1,5 @@
 import 'package:symptomator/backend/disease.dart';
+import 'package:symptomator/backend/user_entry.dart';
 
 class User {
   final String name1;
@@ -8,6 +9,7 @@ class User {
 
   final List<Disease> _diseases = [];
 
+  final List<UserEntry> _allEntries = [];
   User({required this.name1, required this.surName1});
   User.fromString(String userDetails)
       // ignore: prefer_initializing_formals
@@ -22,4 +24,5 @@ class User {
   String get surName => surName1;
   // TODO: this has to return an unmodifiable ListView
   List<Disease> get diseases => _diseases;
+  List<UserEntry> get allEntries => _allEntries;
 }

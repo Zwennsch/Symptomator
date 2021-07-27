@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:symptomator/backend/disease.dart';
 
 class IllnessCard extends StatefulWidget {
-  final Icon illnessIcon;
-  final String illness;
+  final Disease disease;
   const IllnessCard(
-      {Key? key, required this.illnessIcon, required this.illness})
+      {Key? key, required this.disease})
       : super(key: key);
 
   @override
@@ -34,19 +34,18 @@ class _IllnessCardState extends State<IllnessCard> {
       child: Column(
         children: [
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              widget.illnessIcon,
+              widget.disease.icon,
               const SizedBox(
                 width: 10,
               ),
               Text(
-                widget.illness,
+                widget.disease.name,
                 style: const TextStyle(fontSize: 20),
               ),
               Expanded(
                   child: Text(
-                // TODO : Find a better word for 'Schwere'
+                // TODO : Find a better word for 'Schwere' => severity
                 '${rating.toInt()}',
                 textAlign: TextAlign.end,
                 style: const TextStyle(fontSize: 20),

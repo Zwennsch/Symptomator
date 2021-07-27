@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/backend/user.dart';
 import 'package:symptomator/my_flutter_app_icons.dart';
+import 'package:symptomator/screens/add_disease_screen.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
@@ -53,17 +54,17 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
             child: ListView(
-              children: const [
+              children: [
                 // TODO: this should build the List of IllnessCards depending on the List<Disease>
-                IllnessCard(
-                    illnessIcon: Icon(MyFlutterApp.head_side_cough),
-                    illness: "Husten"),
-                IllnessCard(
-                    illnessIcon: Icon(MyFlutterApp.temperatire),
-                    illness: 'Fieber'),
-                IllnessCard(
-                    illnessIcon: Icon(MyFlutterApp2.head_side_virus),
-                    illness: "Kopfschmerzen"),
+                // IllnessCard(
+                //     illnessIcon: Icon(MyFlutterApp.head_side_cough),
+                //     illness: "Husten"),
+                // IllnessCard(
+                //     illnessIcon: Icon(MyFlutterApp.temperatire),
+                //     illness: 'Fieber'),
+                // IllnessCard(
+                //     illnessIcon: Icon(MyFlutterApp2.head_side_virus),
+                //     illness: "Kopfschmerzen"),
               ],
             ),
           ),
@@ -71,11 +72,13 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton.icon(
+                  // TODO: save entry to local storage
                   onPressed: () => print('SAVE'),
                   icon: const Icon(Icons.save),
                   label: const Text('SAVE')),
               ElevatedButton.icon(
-                  onPressed: () => print('Add Desease'),
+                  onPressed: () => showModalBottomSheet(
+                      context: context, builder: (context) => AddDisease()),
                   icon: const Icon(Icons.add),
                   label: const Text('ADD NEW')),
             ],
