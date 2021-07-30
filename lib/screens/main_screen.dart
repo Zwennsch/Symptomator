@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/backend/user.dart';
-import 'package:symptomator/my_flutter_app_icons.dart';
+// import 'package:symptomator/my_flutter_app_icons.dart';
 import 'package:symptomator/screens/add_disease_screen.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
@@ -20,16 +20,26 @@ class MainScreen extends StatefulWidget {
 // TODO: side should not have any disease when user first opens page
 class _MainScreenState extends State<MainScreen> {
   String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+  late User _user;
+  late List<Disease> _userDieseases;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = widget.user;
+    _userDieseases = widget.user.diseases;
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Disease> userDiseases = widget.user.diseases;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Symptomator'),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () => print('still to fill out'),
+            // TODO: implement graphics!
+            onPressed: () {},
             icon: const Icon(Icons.auto_graph),
           ),
         ],
@@ -54,18 +64,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
             child: ListView(
-              children: [
-                // TODO: this should build the List of IllnessCards depending on the List<Disease>
-                // IllnessCard(
-                //     illnessIcon: Icon(MyFlutterApp.head_side_cough),
-                //     illness: "Husten"),
-                // IllnessCard(
-                //     illnessIcon: Icon(MyFlutterApp.temperatire),
-                //     illness: 'Fieber'),
-                // IllnessCard(
-                //     illnessIcon: Icon(MyFlutterApp2.head_side_virus),
-                //     illness: "Kopfschmerzen"),
-              ],
+              children: illnessCards(_userDieseases),
             ),
           ),
           Row(
@@ -77,13 +76,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: const Icon(Icons.save),
                   label: const Text('SAVE')),
               ElevatedButton.icon(
-                  onPressed: () => showModalBottomSheet(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      context: context,
-                      builder: (context) => AddDisease()),
+                  onPressed: () => _getDiseasesFromAddDisease(context),
                   icon: const Icon(Icons.add),
                   label: const Text('ADD NEW')),
             ],
@@ -91,5 +84,27 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
     );
+  }
+
+  List<IllnessCard> illnessCards(List<Disease> diseases) {
+    final List<IllnessCard> illnessCards = [];
+    for (final Disease disease in diseases) {
+      illnessCards.add(IllnessCard(disease: disease));
+    }
+    return illnessCards;
+  }
+
+  Future<void> _getDiseasesFromAddDisease(BuildContext context) async {
+    final List<Disease> newDiseasesList =
+        (await showModalBottomSheet<List<Disease>>(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20))),
+            context: context,
+            builder: (context) => AddDisease(userDiseases: _userDieseases)))!;
+    setState(() {
+      _userDieseases = newDiseasesList;
+    });
   }
 }

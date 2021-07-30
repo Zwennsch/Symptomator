@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
 class AddDisease extends StatefulWidget {
-  const AddDisease({Key? key}) : super(key: key);
+  final List<Disease> userDiseases;
+  const AddDisease({Key? key, required this.userDiseases}) : super(key: key);
 
   @override
   _AddDiseaseState createState() => _AddDiseaseState();
@@ -12,6 +14,14 @@ class AddDisease extends StatefulWidget {
 class _AddDiseaseState extends State<AddDisease> {
   String _nameOfDisease = '';
   Icon _iconOfDisease = const Icon(Icons.person_add_alt_rounded);
+  late List<Disease> _userDiseases;
+
+  @override
+  void initState() {
+    super.initState();
+    _userDiseases = widget.userDiseases;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,20 +50,18 @@ class _AddDiseaseState extends State<AddDisease> {
                 });
               }),
           const SizedBox(height: 10),
-          const Text('Select Disease-Icon'),
+          const Text('Select Icon'),
           Expanded(child: Wrap(children: iconsRow())),
-          // const Divider(
-          //   color: Colors.black54,
-          //   height: 10,
-          //   thickness: 2,
-          //   indent: 2,
-          //   endIndent: 2,
-          // ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton.icon(
-                  onPressed: () => print('back to main_screen'),
+                  onPressed: () => _sendDataToMainScreen(context),
+                  icon: const Icon(Icons.arrow_left_outlined),
+                  label: const Text('BACK TO MAIN')),
+              ElevatedButton.icon(
+                  onPressed: () => _userDiseases
+                      .add(Disease(_iconOfDisease, _nameOfDisease)),
                   icon: const Icon(Icons.add),
                   label: const Text('Add To List')),
             ],
@@ -61,6 +69,10 @@ class _AddDiseaseState extends State<AddDisease> {
         ],
       ),
     );
+  }
+
+  void _sendDataToMainScreen(BuildContext context) {
+    Navigator.pop(context, _userDiseases);
   }
 
   List<IconButton> iconsRow() {

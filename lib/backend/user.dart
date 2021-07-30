@@ -7,7 +7,7 @@ class User {
   // final int _id;
   final String surName1;
 
-  final List<Disease> _diseases = [];
+  List<Disease> diseases = [];
 
   final List<UserEntry> _allEntries = [];
   User({required this.name1, required this.surName1});
@@ -23,6 +23,10 @@ class User {
   String get name => name1;
   String get surName => surName1;
   // TODO: this has to return an unmodifiable ListView
-  List<Disease> get diseases => _diseases;
+  // List<Disease> get diseases => _diseases;
+  // void set diseases(List<Disease> diseases) {
+  //   _diseases = diseases;
+  // }
+
   List<UserEntry> get allEntries => _allEntries;
 }
