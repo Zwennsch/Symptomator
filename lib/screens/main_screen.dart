@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/backend/user.dart';
-// import 'package:symptomator/my_flutter_app_icons.dart';
 import 'package:symptomator/screens/add_disease_screen.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
@@ -86,10 +85,17 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  List<IllnessCard> illnessCards(List<Disease> diseases) {
-    final List<IllnessCard> illnessCards = [];
+  List<GestureDetector> illnessCards(List<Disease> diseases) {
+    final List<GestureDetector> illnessCards = [];
     for (final Disease disease in diseases) {
-      illnessCards.add(IllnessCard(disease: disease));
+      illnessCards.add(GestureDetector(
+        onLongPress: () {
+          setState(() {
+            _userDieseases.remove(disease);
+          });
+        },
+        child: IllnessCard(disease: disease),
+      ));
     }
     return illnessCards;
   }
@@ -97,6 +103,7 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> _getDiseasesFromAddDisease(BuildContext context) async {
     final List<Disease> newDiseasesList =
         (await showModalBottomSheet<List<Disease>>(
+            isDismissible: false,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),

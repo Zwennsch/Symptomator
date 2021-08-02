@@ -23,7 +23,7 @@ class LocalStorageHandler {
 
       // Read the file
       // TODO: add a remark/fix : if file does not exist => create it!
-      bool fileExists = await file.exists();
+      final bool fileExists = await file.exists();
       print('File existiert: $fileExists');
       final contents = await file.readAsString();
       if (fileExists) {

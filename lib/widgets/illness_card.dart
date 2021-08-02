@@ -15,6 +15,7 @@ class _IllnessCardState extends State<IllnessCard> {
   double rating = 0;
   @override
   Widget build(BuildContext context) {
+    // TODO: this card needs to be clickable to make it remove on long-press
     // ignore: prefer_final_locals
     return Container(
       decoration: BoxDecoration(
