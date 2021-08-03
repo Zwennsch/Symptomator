@@ -64,13 +64,9 @@ class _AddDiseaseState extends State<AddDisease> {
                   icon: const Icon(Icons.arrow_left_outlined),
                   label: const Text('BACK TO MAIN')),
               ElevatedButton.icon(
-                  // TODO: show small message that disease was added
                   onPressed: () {
                     _userDiseases.add(Disease(_iconOfDisease, _nameOfDisease));
-                    
-                    final SnackBar snackBar = SnackBar(
-                        content: Text('$_nameOfDisease was added to the list'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    _showInfo(_nameOfDisease);
                     _controller.clear();
                     _resetCard();
                   },
@@ -81,6 +77,20 @@ class _AddDiseaseState extends State<AddDisease> {
         ],
       ),
     );
+  }
+
+  void _showInfo(String nameOfDisease) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            titlePadding: const EdgeInsets.all(24),
+            title: Text(
+              '$nameOfDisease \nadded to List of Diseases',
+              textAlign: TextAlign.center,
+            ),
+          );
+        });
   }
 
   void _resetCard() {
