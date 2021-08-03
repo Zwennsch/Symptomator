@@ -38,10 +38,10 @@ class LocalStorageHandler {
     }
   }
 
-  Future<File> writeCounter(int counter) async {
+  Future<File> writeUserDataToFile(User user) async {
     final file = await _localFile;
 
     // Write the file
-    return file.writeAsString('$counter');
+    return file.writeAsString('user');
   }
 }

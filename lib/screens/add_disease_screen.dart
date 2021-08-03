@@ -15,12 +15,12 @@ class _AddDiseaseState extends State<AddDisease> {
   final TextEditingController _controller = TextEditingController();
   String _nameOfDisease = '';
   Icon _iconOfDisease = const Icon(Icons.person_add_alt_rounded);
-  late List<Disease> _userDiseases;
+  late List<Disease> _userDiseasesCopy;
 
   @override
   void initState() {
     super.initState();
-    _userDiseases = widget.userDiseases;
+    _userDiseasesCopy = List.of(widget.userDiseases);
   }
 
   @override
@@ -65,7 +65,8 @@ class _AddDiseaseState extends State<AddDisease> {
                   label: const Text('BACK TO MAIN')),
               ElevatedButton.icon(
                   onPressed: () {
-                    _userDiseases.add(Disease(_iconOfDisease, _nameOfDisease));
+                    _userDiseasesCopy
+                        .add(Disease(_iconOfDisease, _nameOfDisease));
                     _showInfo(_nameOfDisease);
                     _controller.clear();
                     _resetCard();
@@ -103,7 +104,7 @@ class _AddDiseaseState extends State<AddDisease> {
   void _sendDataToMainScreen(BuildContext context) {
     // FIXME: cannot dispose controller here because exception gets thrown!
     // _controller.dispose();
-    Navigator.pop(context, _userDiseases);
+    Navigator.pop(context, _userDiseasesCopy);
   }
 
   List<IconButton> iconsRow() {

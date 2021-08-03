@@ -16,17 +16,16 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-// TODO: side should not have any disease when user first opens page
 class _MainScreenState extends State<MainScreen> {
   String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
   late User _user;
-  late List<Disease> _userDieseases;
+  // late List<Disease> _userDieseases;
 
   @override
   void initState() {
     super.initState();
     _user = widget.user;
-    _userDieseases = widget.user.diseases;
+    // _userDieseases = widget.user.diseases;
   }
 
   @override
@@ -46,6 +45,7 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // TODO: make the date clickable to add a list for a past date
           Text('Datum: $date'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
             child: ListView(
-              children: illnessCards(_userDieseases),
+              children: illnessCards(_user.diseases),
             ),
           ),
           Row(
@@ -89,9 +89,11 @@ class _MainScreenState extends State<MainScreen> {
     final List<GestureDetector> illnessCards = [];
     for (final Disease disease in diseases) {
       illnessCards.add(GestureDetector(
+        // TODO: should maybe show a Dialog with the help of showDialog to ask user if he/she wants to delete item
         onLongPress: () {
           setState(() {
-            _userDieseases.remove(disease);
+            _user.removeDisease(disease);
+            // _userDieseases.remove(disease);
           });
         },
         child: IllnessCard(disease: disease),
@@ -109,9 +111,9 @@ class _MainScreenState extends State<MainScreen> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             context: context,
-            builder: (context) => AddDisease(userDiseases: _userDieseases)))!;
+            builder: (context) => AddDisease(userDiseases: _user.diseases)))!;
     setState(() {
-      _userDieseases = newDiseasesList;
+      _user.diseases = newDiseasesList;
     });
   }
 }
