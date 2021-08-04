@@ -40,7 +40,7 @@ class NewUserScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              MainScreen(user: User(name1: _name, surName1: _surname), newUser: true,)));
+                              MainScreen(user: User(name: _name, surName: _surname), newUser: true,)));
                 },
                 style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
                 child: const Text('ENTER'),

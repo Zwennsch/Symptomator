@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/newUser': (context) => const NewUserScreen(),
         // TODO: Here a fix is needed, there shouldn't be a name here
         '/main': (context) =>  MainScreen(
-             user: User(name1: 'NEW', surName1: 'USER'),
+             user: User(name: 'NEW', surName: 'USER'),
               newUser: true,
             ),
       },

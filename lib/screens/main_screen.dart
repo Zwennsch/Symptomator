@@ -55,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person)),
               Text(
-                '${widget.user.name1} ${widget.user.surName1}',
+                '${widget.user.name} ${widget.user.surName}',
                 textAlign: TextAlign.center,
                 style: nameStyle,
               ),
