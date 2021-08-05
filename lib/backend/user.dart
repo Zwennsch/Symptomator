@@ -13,12 +13,11 @@ class User {
   /// to insert new data.
   List<Disease> _diseases = [];
 
-  /// the list of [UserEntry] that the user stored previoulsy. 
+  /// the list of [UserEntry] that the user stored previoulsy.
   final List<UserEntry> _allEntries = [];
 
-  
   User({required this.name, required this.surName});
-  
+
   User.fromString(String userDetails)
       // ignore: prefer_initializing_formals
       : name = userDetails,
@@ -45,6 +44,10 @@ class User {
 
   set diseases(List<Disease> diseases) {
     _diseases = diseases;
+  }
+
+  void addEntry(UserEntry entry) {
+    _allEntries.add(entry);
   }
 
   List<UserEntry> get allEntries => _allEntries;

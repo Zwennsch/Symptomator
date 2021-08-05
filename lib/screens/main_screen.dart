@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
+import 'package:symptomator/backend/local_storage_handler.dart';
 import 'package:symptomator/backend/user.dart';
+import 'package:symptomator/backend/user_entry.dart';
 import 'package:symptomator/screens/add_disease_screen.dart';
 import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
@@ -17,9 +19,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+  DateTime today = DateTime.now();
+  String dateStringFormatted = DateFormat('dd-MM-yyyy').format(DateTime.now());
+  DateTime selectedDate = DateTime.now();
+  final LocalStorageHandler _handler = LocalStorageHandler();
   late User _user;
-  // late List<Disease> _userDieseases;
 
   @override
   void initState() {
@@ -45,8 +49,8 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // TODO: make the date clickable to add a list for a past date
-          Text('Datum: $date'),
+          // TODO: make the date clickable to add a list for a past date ; use date_pickers_package
+          Text('Datum: $dateStringFormatted'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -71,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               ElevatedButton.icon(
                   // TODO: save entry to local storage
-                  onPressed: () => print('SAVE'),
+                  onPressed: () => saveEntryToLocalStorage(),
                   icon: const Icon(Icons.save),
                   label: const Text('SAVE')),
               ElevatedButton.icon(
@@ -115,5 +119,13 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _user.diseases = newDiseasesList;
     });
+  }
+
+  void saveEntryToLocalStorage() {
+    final map = UserEntry.getMapFromIllnessList(_user.diseases);
+    final UserEntry entry =
+        UserEntry(user: _user, date: selectedDate, diseaseSeverityMap: map);
+    _user.addEntry(entry);
+    print(_user.allEntries);
   }
 }

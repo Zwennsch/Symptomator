@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:symptomator/backend/disease.dart';
 
 class IllnessCard extends StatefulWidget {
-   final Disease disease;
-   const IllnessCard(
-      {Key? key, required this.disease})
-      : super(key: key);
+  final Disease disease;
+  const IllnessCard({Key? key, required this.disease}) : super(key: key);
 
   @override
   _IllnessCardState createState() => _IllnessCardState();
@@ -60,6 +58,7 @@ class _IllnessCardState extends State<IllnessCard> {
               onChanged: (newValue) {
                 setState(() {
                   rating = newValue;
+                  widget.disease.severity = newValue.toInt();
                   // print(rating);
                 });
               },
