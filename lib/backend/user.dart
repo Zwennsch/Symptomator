@@ -46,8 +46,19 @@ class User {
     _diseases = diseases;
   }
 
-  void addEntry(UserEntry entry) {
-    _allEntries.add(entry);
+  void addEntry(UserEntry other) {
+    if (_allEntries.isEmpty) {
+      _allEntries.add(other);
+      return;
+    }
+    for (final UserEntry entry in _allEntries) {
+      if (entry.isTheSameDay(other.date)) {
+        _allEntries.remove(entry);
+        _allEntries.add(other);
+        return;
+      }
+      _allEntries.add(other);
+    }
   }
 
   List<UserEntry> get allEntries => _allEntries;
