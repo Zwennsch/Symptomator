@@ -9,7 +9,7 @@ class Disease {
 
   @override
   String toString() {
-    return 'Disease: $name';
+    return 'Disease: $name; Severity: $severity';
   }
   // int get severity() => _severity;
   // set severity(int severity) => _severity = severity;

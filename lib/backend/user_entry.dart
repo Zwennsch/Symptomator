@@ -4,13 +4,13 @@ import 'package:symptomator/backend/user.dart';
 class UserEntry {
   final DateTime date;
   final User user;
-  final Map<Disease, int> diseaseSeverityMap;
+  final List<Disease> diseaseSeverityList;
 
   UserEntry(
       {required this.user,
       required this.date,
-      required this.diseaseSeverityMap});
-// TODO: finish helper-method
+      required this.diseaseSeverityList});
+
   static Map<Disease, int> getMapFromIllnessList(List<Disease> illnessList) {
     final Map<Disease, int> result = {};
     for (final Disease disease in illnessList) {
@@ -19,6 +19,8 @@ class UserEntry {
 
     return result;
   }
+
+  // static Map<DateTime, List<Disease>> getDateDiseasesMap()
 
   bool isTheSameDay(DateTime other) {
     if (!(date.day == other.day)) return false;
@@ -29,6 +31,6 @@ class UserEntry {
 
   @override
   String toString() {
-    return "UserEntry on $date for ${user.name} is: $diseaseSeverityMap ";
+    return "UserEntry on $date for ${user.name} is: $diseaseSeverityList ";
   }
 }

@@ -13,8 +13,8 @@ class User {
   /// to insert new data.
   List<Disease> _diseases = [];
 
-  /// the list of [UserEntry] that the user stored previoulsy.
-  final List<UserEntry> _allEntries = [];
+/// this Map has all the stored [UserEntry] so far. 
+  final Map<DateTime, List<Disease>> _storedEntries = {};
 
   User({required this.name, required this.surName});
 
@@ -47,19 +47,12 @@ class User {
   }
 
   void addEntry(UserEntry other) {
-    if (_allEntries.isEmpty) {
-      _allEntries.add(other);
-      return;
+    DateTime selectedDate = other.date;
+    if (_storedEntries.containsKey(selectedDate)) {
+      _storedEntries.remove(selectedDate);
     }
-    for (final UserEntry entry in _allEntries) {
-      if (entry.isTheSameDay(other.date)) {
-        _allEntries.remove(entry);
-        _allEntries.add(other);
-        return;
-      }
-      _allEntries.add(other);
-    }
+    _storedEntries.putIfAbsent(selectedDate, () => _diseases);
   }
 
-  List<UserEntry> get allEntries => _allEntries;
+  Map<DateTime, List<Disease>> get storedEntries => _storedEntries;
 }

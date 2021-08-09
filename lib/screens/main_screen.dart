@@ -19,9 +19,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  DateTime today = DateTime.now();
-  String dateStringFormatted = DateFormat('dd-MM-yyyy').format(DateTime.now());
-  DateTime selectedDate = DateTime.now();
+  /// the date that gets selected by the user. By default it is set to the actual day
+  /// Minute, Second and Millisecond is set to zero.
+  DateTime _selectedDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   final LocalStorageHandler _handler = LocalStorageHandler();
   late User _user;
 
@@ -34,6 +35,10 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(_selectedDate);
+    // TODO: I could use this String as the key for the Map that stores all UserEntries instead of an actual DateTime object, since it doesn't have any seconds...
+    String _dateStringFormatted =
+        DateFormat('dd-MM-yyyy').format(_selectedDate);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Symptomator'),
@@ -50,10 +55,14 @@ class _MainScreenState extends State<MainScreen> {
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // TODO: make the date clickable to add a list for a past date ; use date_pickers_package
-          Text('Datum: $dateStringFormatted'),
+          GestureDetector(
+            onTap: () => pickDate(context),
+            child: Text('Datum: $_dateStringFormatted'),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // TODO: make you select your own avatar from a picture
               const CircleAvatar(
                   radius: 20.0,
                   backgroundColor: Colors.white,
@@ -89,6 +98,19 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  Future pickDate(BuildContext context) async {
+    final initialDate = _selectedDate;
+    final newDate = await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: DateTime(DateTime.now().year - 1),
+        lastDate: DateTime(DateTime.now().year + 1));
+    if (newDate == null) return;
+    setState(() {
+      _selectedDate = newDate;
+    });
+  }
+
   List<GestureDetector> illnessCards(List<Disease> diseases) {
     final List<GestureDetector> illnessCards = [];
     for (final Disease disease in diseases) {
@@ -122,10 +144,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void saveEntryToLocalStorage() {
-    final map = UserEntry.getMapFromIllnessList(_user.diseases);
-    final UserEntry entry =
-        UserEntry(user: _user, date: selectedDate, diseaseSeverityMap: map);
+    // final map = UserEntry.getMapFromIllnessList(_user.diseases);
+    print(_user.diseases);
+    final UserEntry entry = UserEntry(
+        user: _user, date: _selectedDate, diseaseSeverityList: _user.diseases);
     _user.addEntry(entry);
-    print(_user.allEntries);
+    print(_user.storedEntries);
   }
 }
