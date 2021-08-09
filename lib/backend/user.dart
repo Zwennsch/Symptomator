@@ -47,7 +47,7 @@ class User {
   }
 
   void addEntry(UserEntry other) {
-    DateTime selectedDate = other.date;
+    final DateTime selectedDate = other.date;
     if (_storedEntries.containsKey(selectedDate)) {
       _storedEntries.remove(selectedDate);
     }

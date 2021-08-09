@@ -35,8 +35,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(_selectedDate);
-    // TODO: I could use this String as the key for the Map that stores all UserEntries instead of an actual DateTime object, since it doesn't have any seconds...
     String _dateStringFormatted =
         DateFormat('dd-MM-yyyy').format(_selectedDate);
     return Scaffold(
@@ -54,7 +52,6 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // TODO: make the date clickable to add a list for a past date ; use date_pickers_package
           GestureDetector(
             onTap: () => pickDate(context),
             child: Text('Datum: $_dateStringFormatted'),
@@ -117,10 +114,7 @@ class _MainScreenState extends State<MainScreen> {
       illnessCards.add(GestureDetector(
         // TODO: should maybe show a Dialog with the help of showDialog to ask user if he/she wants to delete item
         onLongPress: () {
-          setState(() {
-            _user.removeDisease(disease);
-            // _userDieseases.remove(disease);
-          });
+          _showDeleteDialog(context, disease);
         },
         child: IllnessCard(disease: disease),
       ));
@@ -141,6 +135,35 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _user.diseases = newDiseasesList;
     });
+  }
+
+  void _showDeleteDialog(BuildContext context, Disease disease) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Text("Delete ${disease.name}", textAlign: TextAlign.center),
+          content:
+              const Text("Do you want to delete this disease from the list?"),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                _user.removeDisease(disease);
+                Navigator.of(context).pop();
+                setState(() {});
+              },
+              child: const Text("OK"),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("CANCEL"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void saveEntryToLocalStorage() {
