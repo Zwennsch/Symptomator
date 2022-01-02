@@ -76,19 +76,22 @@ class _MainScreenState extends State<MainScreen> {
               children: illnessCards(_user.diseases),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton.icon(
-                  // TODO: save entry to local storage
-                  onPressed: () => saveEntryToLocalStorage(),
-                  icon: const Icon(Icons.save),
-                  label: const Text('SAVE')),
-              ElevatedButton.icon(
-                  onPressed: () => _getDiseasesFromAddDisease(context),
-                  icon: const Icon(Icons.add),
-                  label: const Text('ADD NEW')),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton.icon(
+                    // TODO: save entry to local storage
+                    onPressed: () => saveEntryToLocalStorage(),
+                    icon: const Icon(Icons.save),
+                    label: const Text('SAVE')),
+                ElevatedButton.icon(
+                    onPressed: () => _getDiseasesFromAddDisease(context),
+                    icon: const Icon(Icons.add),
+                    label: const Text('ADD NEW')),
+              ],
+            ),
           )
         ],
       ),
@@ -112,9 +115,9 @@ class _MainScreenState extends State<MainScreen> {
     final List<GestureDetector> illnessCards = [];
     for (final Disease disease in diseases) {
       illnessCards.add(GestureDetector(
-        // TODO: should maybe show a Dialog with the help of showDialog to ask user if he/she wants to delete item
         onLongPress: () {
           _showDeleteDialog(context, disease);
+          print(_user.diseases);
         },
         child: IllnessCard(disease: disease),
       ));
@@ -150,9 +153,10 @@ class _MainScreenState extends State<MainScreen> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                _user.removeDisease(disease);
+                setState(() {
+                  _user.removeDisease(disease);
+                });
                 Navigator.of(context).pop();
-                setState(() {});
               },
               child: const Text("OK"),
             ),
@@ -166,9 +170,8 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+// FIXME: There still is a strange issue: sometimes the actual severity isn't updated correctly before saving. don't Know why???
   void saveEntryToLocalStorage() {
-    // final map = UserEntry.getMapFromIllnessList(_user.diseases);
-    print(_user.diseases);
     final UserEntry entry = UserEntry(
         user: _user, date: _selectedDate, diseaseSeverityList: _user.diseases);
     _user.addEntry(entry);

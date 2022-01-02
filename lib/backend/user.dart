@@ -13,7 +13,8 @@ class User {
   /// to insert new data.
   List<Disease> _diseases = [];
 
-/// this Map has all the stored [UserEntry] so far. 
+  /// this Map has all the stored [UserEntry] so far.
+// TODO: this could also be a List<UserEntry>
   final Map<DateTime, List<Disease>> _storedEntries = {};
 
   User({required this.name, required this.surName});
