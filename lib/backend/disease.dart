@@ -18,6 +18,15 @@ class Disease {
 
 class DiseaseListNotifier extends StateNotifier<List<Disease>> {
   DiseaseListNotifier() : super([]);
-  
 
+  void addNewDiseas(Disease disease) {
+    state = [...state, disease];
+  }
+
+  void removeDiseaseByName(String name) {
+    state = [
+      for (final disease in state)
+        if (disease.name != name) disease
+    ];
+  }
 }

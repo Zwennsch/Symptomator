@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/my_flutter_app_icons.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
-class AddDisease extends StatefulWidget {
+class AddDisease extends ConsumerWidget {
   final List<Disease> userDiseases;
-  const AddDisease({Key? key, required this.userDiseases}) : super(key: key);
-
-  @override
-  _AddDiseaseState createState() => _AddDiseaseState();
-}
-
-class _AddDiseaseState extends State<AddDisease> {
   final TextEditingController _controller = TextEditingController();
   String _nameOfDisease = '';
   Icon _iconOfDisease = const Icon(Icons.person_add_alt_rounded);
   late List<Disease> _userDiseasesCopy;
 
-  @override
-  void initState() {
-    super.initState();
-    _userDiseasesCopy = List.of(widget.userDiseases);
-  }
+  AddDisease({Key? key, required this.userDiseases}) : super(key: key);
+  
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Column(
@@ -47,9 +38,7 @@ class _AddDiseaseState extends State<AddDisease> {
                 hintText: 'Name Of Disease',
               ),
               onChanged: (name) {
-                setState(() {
-                  _nameOfDisease = name;
-                });
+                
               }),
           const SizedBox(height: 10),
           const Text('Select Icon'),
@@ -107,8 +96,7 @@ class _AddDiseaseState extends State<AddDisease> {
     Navigator.pop(context, _userDiseasesCopy);
   }
 
-  List<IconButton> iconsRow() {
-    const List<Icon> theIcons = [
+    static const List<Icon> theIcons = [
       Icon(Icons.ac_unit),
       Icon(Icons.alarm),
       Icon(Icons.accessibility_new),
@@ -117,6 +105,7 @@ class _AddDiseaseState extends State<AddDisease> {
       Icon(MyFlutterApp.temperatire),
       Icon(MyFlutterApp2.head_side_virus)
     ];
+  List<IconButton> iconsRow() {
     final List<IconButton> theList = [];
     for (int i = 0; i < theIcons.length; i++) {
       theList.add(IconButton(

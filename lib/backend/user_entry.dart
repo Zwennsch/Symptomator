@@ -1,7 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/backend/user.dart';
 
-class UserEntry {
+/// Base class for an entry a [User] makes. A [UserEntry] contains of a date,
+/// a [User] and a [List] of [Disease]. This entry gets updated, when a [User]
+/// enters a new Set of Disease on a specific date. 
+/// This is just a [UserEntry] for one day. 
+class UserEntry{
   final DateTime date;
   final User user;
   final List<Disease> diseaseSeverityList;

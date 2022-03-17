@@ -4,8 +4,15 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:symptomator/backend/user.dart';
 
+import 'disease.dart';
+
 // TODO: his should probapely be implemented using an interface
 class LocalStorageHandler {
+  // this is supposed to make a singleton out of this class
+  static final LocalStorageHandler _instance = LocalStorageHandler();
+
+  factory LocalStorageHandler() => _instance;
+
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
 
@@ -43,5 +50,11 @@ class LocalStorageHandler {
 
     // Write the file
     return file.writeAsString('user');
+  }
+
+  Future<Map<DateTime, List<Disease>>> loadInitialUserEntriesMap() {
+    print('local user EntriesMap being loaded');
+    // TODO: needs to be implemeted, maybe with e mock service first.
+    return Future.delayed(const Duration(seconds: 1), () => {});
   }
 }

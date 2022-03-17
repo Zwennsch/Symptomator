@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:symptomator/backend/disease.dart';
 import 'package:symptomator/backend/local_storage_handler.dart';
+import 'package:symptomator/backend/providers.dart';
 import 'package:symptomator/backend/user.dart';
 import 'package:symptomator/backend/user_entry.dart';
 import 'package:symptomator/screens/add_disease_screen.dart';
@@ -8,7 +10,7 @@ import 'package:symptomator/styles/text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:symptomator/widgets/illness_card.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key, required this.user, required this.newUser})
       : super(key: key);
   final User user;
@@ -18,7 +20,7 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   /// the date that gets selected by the user. By default it is set to the actual day
   /// Minute, Second and Millisecond is set to zero.
   DateTime _selectedDate =
@@ -35,6 +37,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final diseaseList = ref.watch(listOfDiseasesProvider);
     String _dateStringFormatted =
         DateFormat('dd-MM-yyyy').format(_selectedDate);
     return Scaffold(
@@ -73,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
             child: ListView(
-              children: illnessCards(_user.diseases),
+              children: illnessCards(diseaseList),
             ),
           ),
           Padding(

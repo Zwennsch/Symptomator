@@ -1,6 +1,8 @@
 import 'dart:collection';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:symptomator/backend/disease.dart';
+import 'package:symptomator/backend/local_storage_handler.dart';
 import 'package:symptomator/backend/user_entry.dart';
 
 class User {
@@ -8,12 +10,12 @@ class User {
 
   final String surName;
 
-  /// the list of diseases the user used when logged in the last time.
-  /// This list gets displayd in the main_screen so that the user can immediately
+  /// the [List] of [Disease] the [User] used when logged in the last time.
+  /// This [List] gets displayd in the [MainScreen] so that the user can immediately
   /// to insert new data.
   List<Disease> _diseases = [];
 
-  /// this Map has all the stored [UserEntry] so far.
+  /// this Map contains all the stored [UserEntry] so far.
 // TODO: this could also be a List<UserEntry>
   final Map<DateTime, List<Disease>> _storedEntries = {};
 
@@ -57,3 +59,14 @@ class User {
 
   Map<DateTime, List<Disease>> get storedEntries => _storedEntries;
 }
+
+
+
+// class DiseaseEntriesNotifier
+//     extends StateNotifier<Map<DateTime, List<Disease>>> {
+//   DiseaseEntriesNotifier() : super({});
+
+//   Future<void> initStoredEntries() async {
+//     state = await LocalStorageHandler().loadInitialUserEntriesMap();
+//   }
+// }
