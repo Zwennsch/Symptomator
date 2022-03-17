@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Disease {
   final Icon icon;
@@ -13,4 +14,10 @@ class Disease {
   }
   // int get severity() => _severity;
   // set severity(int severity) => _severity = severity;
+}
+
+class DiseaseListNotifier extends StateNotifier<List<Disease>> {
+  DiseaseListNotifier() : super([]);
+  
+
 }
