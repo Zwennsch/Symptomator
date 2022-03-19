@@ -56,7 +56,7 @@ class AddDisease extends ConsumerWidget {
                   onPressed: () {
                     _userDiseasesCopy
                         .add(Disease(_iconOfDisease, _nameOfDisease));
-                    _showInfo(_nameOfDisease);
+                    _showInfo(_nameOfDisease, context);
                     _controller.clear();
                     _resetCard();
                   },
@@ -69,7 +69,7 @@ class AddDisease extends ConsumerWidget {
     );
   }
 
-  void _showInfo(String nameOfDisease) {
+  void _showInfo(String nameOfDisease, BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {

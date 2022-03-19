@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:symptomator/backend/disease.dart';
+import 'package:symptomator/backend/local_storage_handler.dart';
+import 'package:symptomator/mock/mock_user.dart';
 
 import 'user.dart';
 
@@ -7,6 +9,12 @@ final listOfDiseasesProvider =
     StateNotifierProvider<DiseaseListNotifier, List<Disease>>(
         (ref) => DiseaseListNotifier());
 
-// final userProvider = Provider<User>((ref) {
-//   return User(name: 'hans', surName: 'Walter');
-// });
+final mockUserProvider = StateProvider<User>((ref) {
+  return MockUser.instance();
+});
+
+final userProvider = FutureProvider<User>((ref) async {
+  final LocalStorageHandler handler = LocalStorageHandler();
+  final User user = await handler.readUser();
+  return user;
+});
