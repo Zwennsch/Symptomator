@@ -14,12 +14,15 @@ class User {
   /// the [List] of [Disease] the [User] used when logged in the last time.
   /// This [List] gets displayd in the [MainScreen] so that the user can immediately
   /// to insert new data.
-  final List<Disease> _diseases = [];
+  final List<Disease> diseases = [];
 
   /// this Map contains all the stored [UserEntry] so far.
-  final Map<DateTime, List<Disease>> _storedEntriesMappedByDate = {};
+  final Map<DateTime, List<Disease>> storedEntriesMappedByDate = {};
 
-  User({required this.name, required this.surName});
+  User({
+    required this.name,
+    required this.surName,
+  });
 
   User.fromString(String userDetails)
       // ignore: prefer_initializing_formals
@@ -33,46 +36,63 @@ class User {
   // String get name => name;
   // String get surName => surName;
 
-// TODO: this ist still very uncomplete! Diseases and userEntryMap has to be done
   User copyWith(
       {String? name,
       String? surName,
-      List<Disease>? diseases,
+      List<Disease>? dis,
       Map<DateTime, List<Disease>>? userEntriesMap}) {
     final User user =
         User(name: name ?? this.name, surName: surName ?? this.surName);
+    if (dis != null) user.diseases = dis;
+    if (userEntriesMap != null) user.storedEntriesMappedByDate = userEntriesMap;
     return user;
   }
 
-  UnmodifiableListView<Disease> get diseases {
-    return UnmodifiableListView(_diseases);
-  }
+  // UnmodifiableListView<Disease> get diseases {
+  //   return UnmodifiableListView(diseases);
+  // }
 
   void removeDisease(Disease disease) {
-    _diseases.remove(disease);
+    diseases.remove(disease);
   }
 
   void addDisease(Disease disease) {
-    _diseases.add(disease);
+    diseases.add(disease);
   }
 
-  set diseases(List<Disease> diseases) {
-    _diseases = diseases;
+  set storedEntriesMappedByDate(Map<DateTime, List<Disease>> map) {
+    storedEntriesMappedByDate = map;
+  }
+
+  set diseases(List<Disease> dis) {
+    diseases = dis;
   }
 
   void addEntry(UserEntry other) {
     final DateTime selectedDate = other.date;
-    if (_storedEntriesMappedByDate.containsKey(selectedDate)) {
-      _storedEntriesMappedByDate.remove(selectedDate);
+    if (storedEntriesMappedByDate.containsKey(selectedDate)) {
+      storedEntriesMappedByDate.remove(selectedDate);
     }
-    _storedEntriesMappedByDate.putIfAbsent(selectedDate, () => _diseases);
+    storedEntriesMappedByDate.putIfAbsent(selectedDate, () => diseases);
   }
 
-  Map<DateTime, List<Disease>> get storedEntries => _storedEntriesMappedByDate;
+  Map<DateTime, List<Disease>> get storedEntries => storedEntriesMappedByDate;
 }
 
 class UserNotifier extends StateNotifier<User> {
   UserNotifier() : super(User(name: 'mock', surName: 'surMock'));
+
+  void setName(String name, String surname) {
+    state = state.copyWith(name: name, surName: surname);
+  }
+
+  void setList(List<Disease> newList) {
+    state = state.copyWith(dis: newList);
+  }
+
+  void setMap(Map<DateTime, List<Disease>> newMap) {
+    state = state.copyWith(userEntriesMap: newMap);
+  }
 }
 
 

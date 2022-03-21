@@ -34,7 +34,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
     // TODO: CircleProgress isnt' schowing correctly??
     Timer(const Duration(seconds: 2), () {});
 
-    AsyncValue<User> user = ref.watch(userProvider);
+    AsyncValue<User> user = ref.watch(futureUserProvider);
 
     if (user.name != 'no') {
       _userFound = true;

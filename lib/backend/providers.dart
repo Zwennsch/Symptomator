@@ -13,8 +13,11 @@ final mockUserProvider = StateProvider<User>((ref) {
   return MockUser.instance();
 });
 
-final userProvider = FutureProvider<User>((ref) async {
+final futureUserProvider = FutureProvider<User>((ref) async {
   final LocalStorageHandler handler = LocalStorageHandler();
   final User user = await handler.readUser();
   return user;
 });
+
+final userProvider =
+    StateNotifierProvider<UserNotifier, User>((ref) => UserNotifier());
